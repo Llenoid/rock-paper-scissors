@@ -13,20 +13,63 @@ function capitalize(choice) {
   }
 }
 
-function playerSelection() {
-  let playerWeapon = prompt("Type in your weapon (Rock, Paper, Scissors).");
-  return capitalize(playerWeapon);
+function announcer(results) {
+  alert(results);
+}
+function playRound() {
+  let playerWeapon = capitalize(
+    prompt("Type in your weapon (Rock, Paper, Scissors).")
+  );
+  let compWeapon = wpnArray[Math.floor(Math.random() * 3)];
+
+  let computerWin =
+    "You lose!" + " " + compWeapon + " " + "beats" + " " + playerWeapon;
+  let playerWin =
+    "You win!" + " " + playerWeapon + " " + "beats" + " " + compWeapon;
+
+  if (playerWeapon === "Rock" && compWeapon === "Paper") {
+    return announcer(computerWin);
+  } else if (playerWeapon === "Paper" && compWeapon === "Rock") {
+    return announcer(playerWin);
+  }
+  if (playerWeapon === "Paper" && compWeapon === "Scissors") {
+    return announcer(computerWin);
+  } else if (playerWeapon === "Scissors" && compWeapon === "Paper") {
+    return announcer(playerWin);
+  }
+  if (playerWeapon === "Scissors" && compWeapon === "Rock") {
+    return announcer(computerWin);
+  } else if (playerWeapon === "Rock" && compWeapon === "Scissors") {
+    return announcer(playerWin);
+  } else if (playerWeapon === compWeapon) {
+    return announcer("It's a draw");
+  }
+  if (playerWin != null || playerWeapon === compWeapon) {
+    let playerScore = playerScore++;
+    if (playerscore < 3) {
+      alert("Computer Wins");
+    } else {
+      alert("You Win");
+    }
+  }
 }
 
-function computerSelection() {
-  return wpnArray[Math.floor(Math.random() * 3)];
+function endGame() {
+  alert("Babay");
 }
 
-function playRound(playerSelection, computerSelection) {
+function playTime() {
   let startRound = confirm("Want to play?"); //asks the user if they want to play
-
   if (startRound == true) {
-    playerSelection();
+    playRound();
+    for (let i = 0; i < 4; i++) {
+      let playAgain = confirm("Do you want to play again?");
+      if (playAgain == true) {
+        playRound();
+      } else {
+        endGame();
+      }
+    }
   } else if (startRound == false) {
     alert("Then don't!");
   }
