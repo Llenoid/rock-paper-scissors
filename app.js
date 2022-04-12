@@ -1,4 +1,6 @@
 const wpnArray = ["Rock", "Paper", "Scissors"]; //computer weapon choices
+let totalScore = 0; // keep player score
+let playerWin; //so playerWin can be used in playerScore playRound function
 
 //lets the user type Rock/Paper/Scissors in any case and outputs Sentence case Rock/Paper/Scissors
 function capitalize(choice) {
@@ -14,8 +16,16 @@ function capitalize(choice) {
 }
 
 function announcer(results) {
-  alert(results);
+  console.log(results);
 }
+
+function playerScore() {
+  if (playerWin != null) {
+    playerScore = playerScore + 1;
+  }
+  return (totalScore = playerScore);
+}
+
 function playRound() {
   let playerWeapon = capitalize(
     prompt("Type in your weapon (Rock, Paper, Scissors).")
@@ -27,30 +37,26 @@ function playRound() {
   let playerWin =
     "You win!" + " " + playerWeapon + " " + "beats" + " " + compWeapon;
 
-  if (playerWeapon === "Rock" && compWeapon === "Paper") {
-    return announcer(computerWin);
+  if (playerWeapon === compWeapon) {
+    announcer("It's a draw");
+    playerScore();
+  } else if (playerWeapon === "Rock" && compWeapon === "Paper") {
+    announcer(computerWin);
   } else if (playerWeapon === "Paper" && compWeapon === "Rock") {
-    return announcer(playerWin);
+    announcer(playerWin);
+    playerScore();
   }
   if (playerWeapon === "Paper" && compWeapon === "Scissors") {
     return announcer(computerWin);
   } else if (playerWeapon === "Scissors" && compWeapon === "Paper") {
-    return announcer(playerWin);
+    announcer(playerWin);
+    playerScore();
   }
   if (playerWeapon === "Scissors" && compWeapon === "Rock") {
     return announcer(computerWin);
   } else if (playerWeapon === "Rock" && compWeapon === "Scissors") {
-    return announcer(playerWin);
-  } else if (playerWeapon === compWeapon) {
-    return announcer("It's a draw");
-  }
-  if (playerWin != null || playerWeapon === compWeapon) {
-    let playerScore = playerScore++;
-    if (playerscore < 3) {
-      alert("Computer Wins");
-    } else {
-      alert("You Win");
-    }
+    announcer(playerWin);
+    playerScore();
   }
 }
 
@@ -72,5 +78,10 @@ function playTime() {
     }
   } else if (startRound == false) {
     alert("Then don't!");
+  }
+  if (playerScore < 3) {
+    alert("Computer Wins");
+  } else {
+    alert("Player Wins");
   }
 }
